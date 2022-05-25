@@ -1,12 +1,12 @@
 FROM python:3.7-slim
 
 RUN python -m pip install rasa
-RUN python -m http.server
 
 WORKDIR /app
 COPY . .
 
 RUN rasa train nlu
+RUN python -m http.server
 
 USER 1001
 
