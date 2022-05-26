@@ -5,4 +5,4 @@ then
   PORT=5005
 fi
 
-rasa run -m models --enable-api --cors "*" --debug --port $PORT
+rasa run --model models --enable-api --cors "*" --debug --port $PORT
