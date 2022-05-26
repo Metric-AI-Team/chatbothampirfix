@@ -3,6 +3,7 @@ models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.rasa/
 *.py[cod]
 *$py.class
 
