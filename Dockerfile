@@ -1,16 +1,12 @@
-FROM python:3.7-slim
+FROM rasa/rasa:latest
 
-RUN python -m pip install rasa
+COPY app /app
+COPY server.sh /app/server.sh
 
-WORKDIR /app
-COPY . .
-
-RUN rasa train nlu
-RUN python -m http.server
-
+USER root
+RUN chmod -R 777 /app
 USER 1001
 
-ENTRYPOINT ["rasa"]
+RUN rasa train nlu
 
-CMD ["run","--enable-api", "--port","8080", "actions", ]
-
+ENTRYPOINT ["/app/server.sh"]
