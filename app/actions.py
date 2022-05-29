@@ -1,54 +1,54 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
+This files contains your custom actions which can be used to run
+custom Python code.
 
-# from typing import Any, Text, Dict, List
+See this guide on how to implement these action:
+https://rasa.com/docs/rasa/custom-actions
 
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-# import requests
-# from pyowm import OWM
+from typing import Any, Text, Dict, List
 
-# class ActionNama(Action):
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+import requests
+from pyowm import OWM
 
-#     def name(self) -> Text:
-#         return "action_nama_user"
+class ActionNama(Action):
 
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def name(self) -> Text:
+        return "action_nama_user"
 
-#         nama = tracker.get_slot("nama")
-#         dispatcher.utter_message(text= "Halo {} !".format(nama))
-#         return []
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-# key = "9eda082491667401cd76dde164af3199"
+        nama = tracker.get_slot("nama")
+        dispatcher.utter_message(text= "Halo {} !".format(nama))
+        return []
 
-# class ActionCuaca(Action):
+key = "9eda082491667401cd76dde164af3199"
 
-#     def name(self) -> Text:
-#         return "action_cuaca"
+class ActionCuaca(Action):
 
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def name(self) -> Text:
+        return "action_cuaca"
 
-#         loc = tracker.get_slot("loc")
-#         owm = OWM(key)
-#         mgr = owm.weather_manager()
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-#         observation = mgr.weather_at_place(loc)
-#         w = observation.weather
+        loc = tracker.get_slot("loc")
+        owm = OWM(key)
+        mgr = owm.weather_manager()
 
-#         mess1 = f"Laporan Cuaca di {loc}"
-#         mess2 = f"Suhu (celsius) : {w.temperature('celsius')['temp']}"
-#         mess3 = f"Kecepatan Angin : {w.wind()['speed']}Km/h"
-#         mess4 = f"Kelembaban : {w.humidity}%"
-#         mess5 = f"Status Cuaca : {w.detailed_status}."
+        observation = mgr.weather_at_place(loc)
+        w = observation.weather
 
-#         message = mess1 + '\n' + mess2 + '\n' + mess3 + '\n' + mess4 + '\n' + mess5
-#         dispatcher.utter_message(text=message)
+        mess1 = f"Laporan Cuaca di {loc}"
+        mess2 = f"Suhu (celsius) : {w.temperature('celsius')['temp']}"
+        mess3 = f"Kecepatan Angin : {w.wind()['speed']}Km/h"
+        mess4 = f"Kelembaban : {w.humidity}%"
+        mess5 = f"Status Cuaca : {w.detailed_status}."
 
-#         return []
+        message = mess1 + '\n' + mess2 + '\n' + mess3 + '\n' + mess4 + '\n' + mess5
+        dispatcher.utter_message(text=message)
+
+        return []
